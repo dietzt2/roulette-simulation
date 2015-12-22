@@ -1,0 +1,4 @@
+
+
+
+enum Section { INNERSECTION, OUTERSECTION };
