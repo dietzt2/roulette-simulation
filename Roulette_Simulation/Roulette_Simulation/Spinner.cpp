@@ -47,7 +47,10 @@ void Spinner::set_cutoff(Section section, unsigned int cutoff_position, double c
 	}
 	assert(cutoff >= 0);
 
-	innersection_cutoffs[cutoff_position-1] = cutoff;
+	if (section == Section::INNERSECTION)
+		innersection_cutoffs[cutoff_position - 1] = cutoff;
+	else
+		outersection_cutoffs[cutoff_position - 1] = cutoff;
 }
 
 void Spinner::set_multiplier(Section section, unsigned int multiplier_position, double multiplier) {
@@ -86,11 +89,15 @@ unsigned int Spinner::find_spin_index(Section s) {
 	int i = 0;
 
 	if (s == Section::INNERSECTION) {
+		//cout << "Inner" << endl;
 		while (last_spin_degrees > innersection_cutoffs[i]) {
+			//cout << "last_spin_degrees: " << last_spin_degrees << endl;
+			//cout << "innersection cuttof[i]: " << innersection_cutoffs[i] << endl;
 			++i;
 		}
 	}
 	else {
+		//cout << "outer" << endl;
 		while (last_spin_degrees > outersection_cutoffs[i]) {
 			++i;
 		}
