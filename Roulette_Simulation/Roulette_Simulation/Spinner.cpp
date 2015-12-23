@@ -21,7 +21,7 @@ Spinner::Spinner(unsigned int new_innersections, unsigned int new_outersections)
 	assert(new_outersections > 0);
 
 	innersections = new_innersections;
-	outersections = new_innersections;
+	outersections = new_outersections;
 
 	innersection_cutoffs = new double[innersections];
 	outersection_cutoffs = new double[outersections];
@@ -33,6 +33,9 @@ Spinner::Spinner(unsigned int new_innersections, unsigned int new_outersections)
 }
 
 void Spinner::set_cutoff(Section section, unsigned int cutoff_position, double cutoff) {
+
+	//cout << "outersections: " << outersections << endl;
+	//cout << "cutoff position: " << cutoff_position << endl;
 
 	if (section == INNERSECTION) {
 		assert(cutoff_position > 0);
@@ -59,12 +62,21 @@ void Spinner::set_multiplier(Section section, unsigned int multiplier_position, 
 	}
 	assert(multiplier >= 0);
 
-	innersection_multipliers[multiplier_position-1] = multiplier;
+	//cout << "multiplier position: " << multiplier_position << endl;
+	//cout << "multiplier: " << multiplier << endl;
+
+	if (section == Section::INNERSECTION)
+		innersection_multipliers[multiplier_position-1] = multiplier;
+	else 
+		outersection_multipliers[multiplier_position - 1] = multiplier;
 }
 
 void Spinner::spin() {
 
-	last_spin_degrees += (rand() * 360);
+	last_spin_degrees += ((rand() / static_cast<double>(RAND_MAX + 1)) * 360);
+	if (last_spin_degrees > 360)
+		last_spin_degrees -= 360;
+
 	last_spin_inner_index = find_spin_index(Section::INNERSECTION);
 	last_spin_outer_index = find_spin_index(Section::OUTERSECTION);
 }
@@ -74,15 +86,16 @@ unsigned int Spinner::find_spin_index(Section s) {
 	int i = 0;
 
 	if (s == Section::INNERSECTION) {
-		while (last_spin_degrees < innersection_cutoffs[i]) {
+		while (last_spin_degrees > innersection_cutoffs[i]) {
 			++i;
 		}
 	}
 	else {
-		while (last_spin_degrees < outersection_cutoffs[i]) {
+		while (last_spin_degrees > outersection_cutoffs[i]) {
 			++i;
 		}
 	}
+	//cout << "index: " << i << endl;
 	return i;
 }
 
@@ -92,6 +105,9 @@ double Spinner::get_spin_degrees() {
 }
 
 double Spinner::get_spin_multiplier() {
+
+	//cout << "innersection multiplier" << innersection_multipliers[last_spin_inner_index] << endl;
+	//cout << "outersection multiplier" << outersection_multipliers[last_spin_outer_index] << endl;
 
 	return (innersection_multipliers[last_spin_inner_index] * outersection_multipliers[last_spin_outer_index]);
 }
