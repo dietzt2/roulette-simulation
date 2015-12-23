@@ -7,7 +7,6 @@ using namespace std;
 
 int main() {
 
-	int dummy_v;
 	const unsigned int inner_sections = 5;
 	const unsigned int outer_sections = 16;
 
@@ -69,13 +68,9 @@ int main() {
 
 		spinner1.spin();
 		cout << "Spin " << i << " degrees: " << spinner1.get_spin_degrees() << endl;
-		//cout << "Spin " << i << " multiplier: " << spinner1.get_spin_multiplier() << endl;
+		cout << "Spin " << i << " multiplier: " << spinner1.get_spin_multiplier() << endl;
 	}
 
-	do {
-		cout << "Type 1 and press enter to exit: ";
-		cin >> dummy_v;
-	} while (dummy_v != 1);
 
 	return EXIT_SUCCESS;
 }
