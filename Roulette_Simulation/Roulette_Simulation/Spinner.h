@@ -12,7 +12,7 @@ public:
 	//Must be at least one section for each
 	Spinner(unsigned int new_innersections, unsigned int new_outersections);
 
-	//Going in a clockwise direction from the origin, the number (in degrees) from 0 to 360 is the cutoff. 
+	//Going in a clockwise direction from the 12:00 position, the number (in degrees) from 0 to 360 is the cutoff. 
 	//The cutoff_position begins at 1
 	//This is the cutoff for the end of the section. The left cutoff is the end for the previous section.
 	//For example, if the cutoff position is 1, and the cutoff is 45, the section goes from 0 to 45 degrees.
