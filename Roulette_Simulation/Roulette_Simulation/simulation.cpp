@@ -1,9 +1,7 @@
-
 #include <cstdlib>
 #include <iostream>
 #include "Spinner.h"
 using namespace std;
-
 
 void set_spinner1(Spinner& spinner1);
 void set_spinner2(Spinner& spinner2);
@@ -14,27 +12,24 @@ int main() {
 	Spinner spinner1(5, 16);
 	set_spinner1(spinner1);
 
-	double total = 0;
-	const int ITERATIONS = 50000000;
+	double total = 0; //The sum of all iterations of the spinner
+	const int ITERATIONS = 1000000; //The number of times to 'spin' the spinner
 
 	for (int i = 0; i < ITERATIONS; ++i) {
 		spinner1.spin();
 		total += spinner1.get_spin_multiplier();
-		//cout << "Spin " << i << " degrees: " << spinner1.get_spin_degrees() << endl;
-		//cout << "Spin " << i << " multiplier: " << spinner1.get_spin_multiplier() << endl;
 	}
 
 	cout << "Spinner 1 Expected value: " << (total / ITERATIONS) << endl;
 
+	//Spinner with 5 inner sections and 24 outer sections
 	Spinner spinner2(5, 24);
 	set_spinner2(spinner2);
-	total = 0;
+	total = 0; //The sum of all iterations of the spinner
 
 	for (int i = 0; i < ITERATIONS; ++i) {
 		spinner2.spin();
 		total += spinner2.get_spin_multiplier();
-		//cout << "Spin " << i << " degrees: " << spinner2.get_spin_degrees() << endl;
-		//cout << "Spin " << i << " multiplier: " << spinner2.get_spin_multiplier() << endl;
 	}
 
 	cout << "Spinner 2 Expected value: " << (total / ITERATIONS) << endl;
