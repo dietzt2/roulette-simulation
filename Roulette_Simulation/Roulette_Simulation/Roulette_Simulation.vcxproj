@@ -154,10 +154,6 @@
     <ClInclude Include="Spinner.h" />
     <ClInclude Include="spinner_section.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="Spinner_1.jpg" />
-    <Image Include="Spinner_2.jpg" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
