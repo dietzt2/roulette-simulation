@@ -9,7 +9,11 @@ void set_spinner2(Spinner& spinner2);
 int main() {
 
 	//Spinner with 5 inner sections and 16 outer sections
-	Spinner spinner1(5, 16);
+	//Spinner spinner1(5, 16);
+	Spinner spinner1;
+	spinner1.change_num_sections(Section::INNERSECTION, 5);
+	spinner1.change_num_sections(Section::OUTERSECTION, 16);
+
 	set_spinner1(spinner1);
 
 	double total = 0; //The sum of all iterations of the spinner
@@ -23,7 +27,11 @@ int main() {
 	cout << "Spinner 1 Expected value: " << (total / ITERATIONS) << endl;
 
 	//Spinner with 5 inner sections and 24 outer sections
-	Spinner spinner2(5, 24);
+	//Spinner spinner2(5, 24);
+	Spinner spinner2;
+	spinner2.change_num_sections(Section::INNERSECTION, 5);
+	spinner2.change_num_sections(Section::OUTERSECTION, 24);
+
 	set_spinner2(spinner2);
 	total = 0; //The sum of all iterations of the spinner
 
@@ -33,6 +41,20 @@ int main() {
 	}
 
 	cout << "Spinner 2 Expected value: " << (total / ITERATIONS) << endl;
+
+	Spinner spinner3(2, 1);
+
+	spinner3.set_cutoff_and_multiplier(Section::INNERSECTION, 1, 180, 1);
+	spinner3.set_cutoff_and_multiplier(Section::INNERSECTION, 2, 360, 0);
+	spinner3.set_cutoff_and_multiplier(Section::OUTERSECTION, 1, 360, 1);
+
+	total = 0;
+	for (int i = 0; i < ITERATIONS; ++i) {
+		spinner3.spin();
+		total += spinner3.get_spin_multiplier();
+	}
+
+	cout << "Spinner 3 expected value: " << (total / ITERATIONS) << endl;
 
 	return EXIT_SUCCESS;
 }

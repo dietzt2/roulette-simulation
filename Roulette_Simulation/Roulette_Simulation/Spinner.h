@@ -24,6 +24,10 @@ public:
 	//The multiplier must be at least 0.
 	void set_multiplier(Section section, unsigned int multiplier_position, double multiplier);
 
+	void set_cutoff_and_multiplier(Section section, unsigned int position, double cutoff, double multiplier);
+
+	void change_num_sections(Section section, unsigned int num_sections);
+
 	//Provides the angle of the last spin in degrees
 	double get_spin_degrees();
 
